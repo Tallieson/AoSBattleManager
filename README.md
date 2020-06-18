@@ -1,7 +1,5 @@
 # AoSBattleManager
 
-<h1>AoS Battle Manager</h1>
-
 
 <h2>Project Overview</h2>
 Age of Sigmar is a miniature table top war game produced by Games Workshop. To play efficently, you need access to rules speread across half a dozen books, AoS Battle Manager will condense nearly all of those into 1 source. Using Python, Django, HTML/CSS, and MySQL we'll allow users to acess that content without the books, as well as create custom content for other users to use in thier own games. 
