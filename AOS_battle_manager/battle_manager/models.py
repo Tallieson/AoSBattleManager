@@ -37,11 +37,11 @@ class TerrainFeature(models.Model):
     battle_specific = models.BooleanField
     specific_battle_id = models.IntegerField
 
-
-class BattlePlans(models.Model):
-    name = models.CharField(max_length=200)
-    aditional_rules = models.ManyToManyRel(AdditionalRules)
-
 class AdditionalRules(models.Model):
     name = models.CharField(max_length=200)
     effect = models.CharField(max_length=1000)
+
+class BattlePlans(models.Model):
+    name = models.CharField(max_length=200)
+    aditional_rules = models.ManyToManyField(AdditionalRules)
+
