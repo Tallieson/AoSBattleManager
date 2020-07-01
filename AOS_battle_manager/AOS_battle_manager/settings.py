@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from . import secrets
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -82,11 +83,11 @@ DATABASES = {
 
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'BattleManagerDB',
-        'USER': 'BattleManagerDBadmin',
-        'PASSWORD': 'Aquabro6000!',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'NAME': secrets.db_name,
+        'USER': secrets.db_username,
+        'PASSWORD': secrets.db_password,
+        'HOST': secrets.db_host,
+        'PORT': secrets.db_port,
     }
 }
 
