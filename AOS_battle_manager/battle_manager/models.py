@@ -31,9 +31,10 @@ class BattleType(models.Model):
 class BattlePlan(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=1000, null=True)
-    setup = models.CharField(max_length=1000, default="Enter setup info")
-    victory = models.CharField(max_length=1000, default="Enter victory info")
-    aditional_rules = models.ManyToManyField(AdditionalRule)
+    setup = models.CharField(max_length=2000, default="Enter setup info")
+    victory = models.CharField(max_length=2000, default="Enter victory info")
+    additional_rules = models.ManyToManyField(AdditionalRule, blank=True)
+    battle_specific_rules = models.CharField(max_length=2000, null=True, blank=True)
     battle_type = models.ForeignKey(BattleType, on_delete=models.CASCADE, null=True)
     custom = models.BooleanField(default=False)
     submitted_by = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
