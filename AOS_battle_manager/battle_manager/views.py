@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import User, Realm, RealmFeature, CommandAbility, Spell, TerrainFeature, AdditionalRule, BattlePlan, BattleType, Source
 
-# Create your views here.
+
 def battle_manager(request):
     context = {
         'message': 'Hello World!'

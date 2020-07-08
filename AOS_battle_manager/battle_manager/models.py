@@ -112,6 +112,11 @@ class TerrainFeature(models.Model):
     def __str__(self):
         return self.name
 
-
+class Battle(models.Model):
+    battle_plan = models.ForeignKey(BattlePlan, on_delete=models.PROTECT)
+    realm = models.ForeignKey(Realm, on_delete=models.PROTECT)
+    realm_feature = models.ForeignKey(RealmFeature, on_delete=models.PROTECT)
+    terrain = models.IntegerField(blank=True)
+    terrain_feature = models.ManyToManyField(TerrainFeature, blank=True)
 
 
