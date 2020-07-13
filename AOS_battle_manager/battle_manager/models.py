@@ -113,6 +113,7 @@ class TerrainFeature(models.Model):
         return self.name
 
 class Battle(models.Model):
+    battle_type = models.ForeignKey(BattleType, on_delete=models.PROTECT)
     battle_plan = models.ForeignKey(BattlePlan, on_delete=models.PROTECT)
     realm = models.ForeignKey(Realm, on_delete=models.PROTECT)
     realm_feature = models.ForeignKey(RealmFeature, on_delete=models.PROTECT)

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Realm, RealmFeature, CommandAbility, Spell, TerrainFeature, AdditionalRule, BattlePlan, BattleType, Source
+from .models import User, Realm, RealmFeature, CommandAbility, Spell, TerrainFeature, AdditionalRule, BattlePlan, BattleType, Source, Battle
 
 # Register your models here.
 admin.site.register(User)
@@ -12,3 +12,4 @@ admin.site.register(AdditionalRule)
 admin.site.register(BattlePlan)
 admin.site.register(BattleType)
 admin.site.register(Source)
+admin.site.register(Battle)
