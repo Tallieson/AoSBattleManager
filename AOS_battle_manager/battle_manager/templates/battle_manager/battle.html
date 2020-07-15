@@ -5,19 +5,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fondamento&display=swap" rel="stylesheet">
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'battle_manager/style.css' %}">
     <title>AOS Battle Manager</title>
 </head>
+<style>
+    body {
+        font-family: 'Fondamento', cursive;
+        background-image: url("{% static 'battle_manager/images/background3.jpg' %}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+</style>
 
 <body>
-    <span><h1 class="text-center">{{Battle.battle_plan}}<i class="fas fa-info-circle"></i></h1></span>
-    <h2 class="text-center">{{Battle.battle_type}}</h2>
-    <div class="row row-no-gutters">
+    <div class="text-center">
+        <span class="h1">{{Battle.battle_plan}}</span>
+        <button type="button" class="btn btn-primary btn-icon btn-rounded" data-toggle="popover" title="Page Source"
+            data-content="{{Battle.battle_plan.source}} pg. {{Battle.battle_plan.source_page}}"><i
+                class="fas fa-info-circle fa-2x"></i></button>
+    </div>
+    <div class="text-center">
+        <h2>{{Battle.battle_type}}</h2>
+        <p><i>{{Battle.battle_plan.description}}</i></p>
+    </div>
+    <button class="btn btn-primary" data-toggle="collapse" data-target="#battle_plan">Battle Plan Details</button>
+    <div class="row row-no-gutters" id="battle_plan">
         <div class="col-sm-4">
-            <span><i>{{Battle.battle_plan.description}}</i></span>
+            <div class="text-center">
+                <h2>Setup</h2>
+            </div>
+            <span>{{Battle.battle_plan.setup}}</span>
             <br><br>
             {% for additional_rule in Battle.battle_plan.additional_rules.all %}
             <span><b>{{additional_rule.name}}</b><br>
@@ -25,22 +48,71 @@
             </span>
             <br>
             {% endfor %}
-            <br>
-            <h4>Setup</h4>
-            <span>{{Battle.battle_plan.setup}}</span>
         </div>
         <div class="col-sm-4">
-            <h4>Battle Specific Rules</h4>
-            <span>{{Battle.battle_plan.battle_specific_rules}}</span>
+            <div class="text-center">
+                <h2>Battle Specific Rules</h2>
+            </div>
+            <span>{{SpecificRules | safe}}</span>
         </div>
         <div class="col-sm-4">
-            <h4>Victory</h4>
+            <div class="text-center">
+                <h2>Victory</h2>
+            </div>
             <span>{{Battle.battle_plan.victory}}</span>
         </div>
     </div>
     <div>
-        <img src="{{ Battle.battle_plan.deployment_map.url }}">
+        <button class="btn btn-primary" data-toggle="collapse" data-target="#deploy_map">Deployment Map</button>
+        <div id="deploy_map" class="collapse">
+            <img src="{{ Battle.battle_plan.deployment_map.url }}" class="img-deploy img-fluid">
+        </div>
     </div>
+
+    <div class="text-center">
+        <span class="h1">{{Battle.realm.name}}</span>
+        <button type="button" class="btn btn-primary btn-icon btn-rounded" data-toggle="popover" title="Page Source"
+            data-content="{{Battle.realm_feature.source}} pg. {{Battle.realm_feature.source_page}}"><i
+                class="fas fa-info-circle fa-2x"></i></button>
+    </div>
+    <button class="btn btn-primary" data-toggle="collapse" data-target="#realm">Realm Details</button>
+    <div class="row row-no-gutters" id="realm">
+        <div class="col-sm-4">
+            <div class="text-center">
+                <h2>Realmscape Feature</h2>
+            </div>
+            <p>{{Battle.realm_feature.name}} - {{Battle.realm_feature.effect}}</p>
+            <h2>Realm Command Abilities</h2>
+            {% for key,value in CommandAbilities.items %}
+            <p><b>{{key}}</b> - {{value}} <br></p>
+            {% endfor %}
+        </div>
+        <div class="col-sm-4">
+            <div class="text-center">
+                <h2>Realm Spells</h2>
+            </div>
+            {% for key,value in Spells.items %}
+            <p><b>{{key}}</b> - {{value}} <br></p>
+            {% endfor %}
+
+        </div>
+        <div class="col-sm-4">
+            <div class="text-center">
+                <h2>Scenery Rules</h2>
+            </div>
+            {% for key,value in TerrainEffects.items %}
+            <p><b>{{key}}</b> - {{value}} <br></p>
+            {% endfor %}
+        </div>
+        <!-- number of features. use this for something -->
+
+
+
+        <script>
+            $(function () {
+                $('[data-toggle="popover"]').popover()
+            })
+        </script>
 </body>
 
 </html>
