@@ -7,7 +7,7 @@ from .models import User, Realm, RealmFeature, CommandAbility, Spell, TerrainFea
 
 def battle_manager(request):
     context = {
-        'message': 'Hello World!'
+        'message': "<br><br><h2>IT'S ALLIIVVVVEEEE!!<h2><br><br>"
     }
     return render(request, 'battle_manager/battle_manager.html', context)
 
@@ -43,7 +43,6 @@ def get_battle_plans(request):
             'source': battle_plan.source.name,
         })
     return JsonResponse({'battle_plans': battle_plans_json})
-
 
 def create_battle(request):
     new_battle = Battle(

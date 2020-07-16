@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Fondamento&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
@@ -13,81 +14,110 @@
 </head>
 
 <body>
-    <form method="POST" action="{% url 'battle_manager:create_battle' %}">
-        {% csrf_token %}
-        <select id="select_battle_type" name="battle_type">
-            {% for type in Types %}
-            <option class="dropdown-item" value="{{type.id}}">{{type.name}}</option>
-            {% endfor %}
-        </select>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="{% url 'battle_manager:battle_manager' %}">Home</a>
+        <a class="navbar-brand" href="{% url 'battle_manager:generate' %}">Create Battle</a>
+        <input class="form-control mr-sm-2" type="number" placeholder="Enter a Battle Number Here" id="battle_id" required>
+        <button class="btn btn-primary" type="submit" id="join_battle">Join Battle!</button>
+    </nav>
 
-        <select id="select_battle_plan" name="battle_plan">
-        </select>
+    <div class="container">
+        <h1 class="text-center" > Generate Your Battle!</h1>
+        <hr style="height:5px; color:#6c5a42;">
+            <form method="POST" class="text-center" action="{% url 'battle_manager:create_battle' %}">
+                {% csrf_token %}
 
-        <select id="select_realm" name="realm">
-            {% for realm in Realms %}
-            <option class="dropdown-item" value="{{realm.id}}">{{realm.name}}</option>
-            {% endfor %}
-        </select>
+                <div>
+                    <label for="battle_type">Select Your Battle Type: </label>
+                    <select id="select_battle_type" name="battle_type" required>
+                        <option selected disabled hidden></option>
+                        {% for type in Types %}
+                        <option class="dropdown-item" value="{{type.id}}">{{type.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
 
-        <select id="select_realm_feature"  name="realm_feature">
-        </select>
+                <div>
+                    <label for="battle_plan">Select Your Battleplan: </label>
+                    <select id="select_battle_plan" name="battle_plan" required>
+                    </select>
+                </div>
 
-        <div>
-            Number of Terrain Features: <input type="number" id="quantity" name="terrain" min="0" max="20">
-        </div>
+                <div>
+                    <label for="realm">Select Your Realm of Battle: </label>
+                    <select id="select_realm" name="realm" required>
+                        <option selected disabled hidden></option>
+                        {% for realm in Realms %}
+                        <option class="dropdown-item" value="{{realm.id}}">{{realm.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
 
-        <button type="submit" class="btn btn-info btn-lg"> Generate Battle!</button>
-    </form>
-
+                <div>
+                    <label for="realm_feature">Select Your Realmscape Feature: </label>
+                    <select id="select_realm_feature" name="realm_feature" required>
+                    </select>
+                </div>
+                <div>
+                    Number of Scenery Peices: <input type="number" id="quantity" name="terrain" min="0" max="20" required>
+                </div>
+                <hr style="height:5px; color:#6c5a42;">
+                <button type="submit" class="btn btn-info btn-lg"> Generate Battle!</button>
+            </form>
+    </div>
     {% for battle in Battles %}
     {% endfor %}
-        <script>
-            let select_battle_type = document.querySelector('#select_battle_type')
-            let select_battle_plan = document.querySelector('#select_battle_plan')
-            let select_realm = document.querySelector('#select_realm')
-            let select_realm_feature = document.querySelector('#select_realm_feature')
+    <script>
+        let select_battle_type = document.querySelector('#select_battle_type')
+        let select_battle_plan = document.querySelector('#select_battle_plan')
+        let select_realm = document.querySelector('#select_realm')
+        let select_realm_feature = document.querySelector('#select_realm_feature')
 
-            select_battle_type.addEventListener('change', function() {
-                axios({
-                    method: 'get',
-                    url: "{% url 'battle_manager:get_battle_plans' %}",
-                    params: {
-                        battle_type_id: select_battle_type.value
-                    }
-                }).then(response => {
-                    console.log(response.data)
-                    select_battle_plan.innerHTML = ''
-                    let battle_plans = response.data.battle_plans
-                    for (let i=0; i< battle_plans.length; ++i){
-                        let option = document.createElement('option')
-                        option.setAttribute('value', battle_plans[i].id)
-                        option.innerText = `${battle_plans[i].name} - ${battle_plans[i].source}`
-                        select_battle_plan.appendChild(option)
-                        }
-                    })
-                })
-    
-            select_realm.addEventListener('change', function() {
-                axios({
-                    method: 'get',
-                    url: "{% url 'battle_manager:get_realm_features' %}",
-                    params: {
-                        realm_id: select_realm.value
-                    }
-                }).then(response => {
-                    console.log(response.data)
-                    select_realm_feature.innerHTML = ''
-                    let realm_features = response.data.realm_features
-                    for (let i=0; i<realm_features.length; ++i){
-                        let option = document.createElement('option')
-                        option.setAttribute('value', realm_features[i].id)
-                        option.innerText = realm_features[i].name
-                        select_realm_feature.appendChild(option)
-                        }
-                    })
-                })
-        </script>
+        select_battle_type.addEventListener('change', function () {
+            axios({
+                method: 'get',
+                url: "{% url 'battle_manager:get_battle_plans' %}",
+                params: {
+                    battle_type_id: select_battle_type.value
+                }
+            }).then(response => {
+                console.log(response.data)
+                select_battle_plan.innerHTML = ''
+                let battle_plans = response.data.battle_plans
+                for (let i = 0; i < battle_plans.length; ++i) {
+                    let option = document.createElement('option')
+                    option.setAttribute('value', battle_plans[i].id)
+                    option.innerText = `${battle_plans[i].name} - ${battle_plans[i].source}`
+                    select_battle_plan.appendChild(option)
+                }
+            })
+        })
+
+        select_realm.addEventListener('change', function () {
+            axios({
+                method: 'get',
+                url: "{% url 'battle_manager:get_realm_features' %}",
+                params: {
+                    realm_id: select_realm.value
+                }
+            }).then(response => {
+                console.log(response.data)
+                select_realm_feature.innerHTML = ''
+                let realm_features = response.data.realm_features
+                for (let i = 0; i < realm_features.length; ++i) {
+                    let option = document.createElement('option')
+                    option.setAttribute('value', realm_features[i].id)
+                    option.innerText = realm_features[i].name
+                    select_realm_feature.appendChild(option)
+                }
+            })
+        })
+
+        join_battle.addEventListener('click', function() {
+        battle_id = document.querySelector('#battle_id').value
+        window.location = "/battle_manager/battle/" + battle_id
+        })
+    </script>
 </body>
 
 </html>
