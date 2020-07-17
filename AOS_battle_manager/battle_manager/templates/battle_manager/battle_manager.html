@@ -21,7 +21,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Fondamento&display=swap" rel="stylesheet">
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'battle_manager/style.css' %}">
-    <title>Home</title>
+    <link rel="shortcut icon" type="image/png" href="{% static '/battle_manager/images/favicon.png' %}"/>
+    <title>Battle Manager Home</title>
 </head>
 
 <body>
@@ -32,10 +33,44 @@
             required>
         <button class="btn btn-primary" type="submit" id="join_battle">Join Battle!</button>
     </nav>
-    <div class="text-center">
-        <div class="h1"> Welcome to AOS Battle Manager!</div>
-        <h2>{{ message|safe}}</h2>
+    <div class="h1 text-center">Welcome to AOS Battle Manager!</div>
+    <div class="post-body__date"></div>
+    <div class="container main-body" style="margin: 1vw;">
+        <div class="row row-no-gutters">
+            <div class="col-sm-8">
+                {% for Post in Posts %}
+                <div class="card-body">
+                    <h2 class="card-title">{{ Post.title }}</h2>
+                    <p class="card-text text-muted h6">{{ Post.author }} | {{ Post.created_on}} </p>
+                    <p class="card-text">{{Post.content}}</p>
+                </div>
+                {% endfor %}
+            </div>
+
+
+            <div class="col-sm-4 float-right">
+                <div class="card my-4">
+                    <h5 class="card-header">What is This?</h5>
+                    <div class="card-body">
+                        <p class="card-text"> AOS Battle Manager is a web application borne of my desire to not carry 4
+                            books to every game of Age of Sigmar. It allows you create battles and displays all relavent
+                            information on a single page. To goto a battle already created, enter it's battle ID in the
+                            search bar at the top.
+                            <br>If you have any suggestions or find any bugs, you can reach me at
+                            admin@aosbattlemanger.com.
+                            I hope you enjoy, and don't play Ironjawz!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    </div>
+    <script>
+        join_battle.addEventListener('click', function () {
+            battle_id = document.querySelector('#battle_id').value
+            window.location = "/battle_manager/battle/" + battle_id
+        })
+    </script>
 </body>
 
 </html>

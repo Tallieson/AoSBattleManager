@@ -6,3 +6,24 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
+
+.main-body{
+    margin-right:0 !important;
+    margin-left:0 !important;
+    max-width: 100% !important;
+}
+
+.post-body__date {
+    bottom: 0;
+    top: auto;
+    background-color: #f9ce62;
+    content: '';
+    height: 2px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 75px;
+}
+*, *::before, *::after {
+    box-sizing: inherit;
+}

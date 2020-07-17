@@ -2,12 +2,12 @@ import re
 from random import shuffle
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
-from .models import User, Realm, RealmFeature, CommandAbility, Spell, TerrainFeature, AdditionalRule, BattlePlan, BattleType, Source, Battle
+from .models import User, Realm, RealmFeature, CommandAbility, Spell, TerrainFeature, AdditionalRule, BattlePlan, BattleType, Source, Battle, Post
 
 
 def battle_manager(request):
     context = {
-        'message': "<br><br><h2>IT'S ALLIIVVVVEEEE!!<h2><br><br>"
+        'Posts': Post.objects.all(),
     }
     return render(request, 'battle_manager/battle_manager.html', context)
 
