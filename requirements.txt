@@ -17,9 +17,11 @@ cycler==0.10.0
 decorator==4.4.2
 defusedxml==0.6.0
 distlib==0.3.0
+dj-database-url==0.5.0
 Django==3.0.6
 django-crispy-forms==1.9.2
 django-fontawesome==1.0
+django-heroku==0.3.1
 docx2txt==0.8
 EbookLib==0.17.1
 entrypoints==0.3
@@ -95,6 +97,7 @@ pytesseract==0.3.4
 python-dateutil==2.8.1
 python-pptx==0.6.18
 pytz==2020.1
+pywin32==227
 pywinpty==0.5.7
 PyYAML==5.3.1
 pyzmq==19.0.0
@@ -123,6 +126,7 @@ virtualenv-clone==0.5.4
 wcwidth==0.1.9
 webencodings==0.5.1
 Werkzeug==1.0.1
+whitenoise==5.2.0
 widgetsnbextension==3.5.1
 wrapt==1.11.2
 xlrd==1.2.0
