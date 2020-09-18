@@ -39,7 +39,7 @@
             <div class="col-sm-8">
                 {% for Post in Posts %}
                 <div class="card-body">
-                    <h2 class="card-title">{{ Post.title }}</h2>
+                    <h3 class="card-title">{{ Post.title }}</h3>
                     <p class="card-text text-muted h6">{{ Post.author }} | {{ Post.created_on}} </p>
                     <p class="card-text">{{Post.content}}</p>
                 </div>
