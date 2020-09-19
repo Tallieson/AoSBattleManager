@@ -1,0 +1,1 @@
+web: gunicorn aos-battle-manager:app
