@@ -1,0 +1,1 @@
+web: gunicorn <AOS_battle_manager>.wsgi --log-file -
