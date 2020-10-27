@@ -1,46 +1,23 @@
 # AoSBattleManager
 
+1. What was the goal and what were the requirements?
+ The goal of the project was to make something to consolidate information spread between multiple books used for playing a miniature war gaming board game called Warhammer:Age   of Sigmar. I wanted a single page that could present the information in a simple way that was easy to refer to.
 
-<h2>Project Overview</h2>
-Age of Sigmar is a miniature table top war game produced by Games Workshop. To play efficently, you need access to rules speread across half a dozen books, AoS Battle Manager will condense nearly all of those into 1 source. Using Python, Django, HTML/CSS, and MySQL we'll allow users to acess that content without the books, as well as create custom content for other users to use in thier own games. 
-
-
-<h2>Functionality</h2>
-User experience should be streamlined as possible. I want to minimized steps users need to take to find the information they need. When beginning a game of Age of Sigmar multiple things need to be determined such as:
- - Open Play/Matched Play/Narrative Play
- - Which "Realm of Battle" is it taking place on
- - What Battle Plan are you using which dictates:
-    - Deployment
-    - Scoring
-    - Potential additonal rules/strategies
- - Terrain Features (which can be dictated by realm of battle)
+2. How does the work meet (or not meet) the goal and requirements?
+ I believe the project meets those requirements well- though 2 weeks into it's design there was new volume of the game released that made it's function largely unnecessary by consolidating multiple books in the 2020 release. It was obsolete before it was finished- but it did meet the goals it originally set out to.
  
- Upon logining in the option to create a new battle will be presented. Users starting a game will be able to randomize these options, or select them individually. these options will be drop down, and on hover will generate a modal with a description of the selection. We should only need to take selections, and shouldn't need other input from the user. All of this should function in a standard MVC loop.
+3. How does it work? (big picture: think about how you would describe this to someone who was going to review the code or add functionality, to get them started)
+It's a relatively simple project. It's build in Django and utilized a Postgres database.
+It has 3 main views:
+ -a landing with a general information news feed
+ -a generation page where the different parameters of a specific "battle" can be set, with filtering columns to ensure legality per the game rules
+ -a paginated "battle" view that fetches the information from the database and displays it neatly
+
+4. Who did you work on this with, and which parts were you responsible for? (If there is no commit or ticket history to review, please be very explicit here)
+ I worked alone on this project.
+
+5. If you could spend more time, what would you add/improve? 
+ Well, I would like to find a way to put it to use now, though largely the issue it was trying to solve was solved organically. If I were to try and improve it I think a lot could be done with the file structure, and the organization of the individual files for readability. 
  
- Once selections are made the information will be rendered in an easy to read view with collapsable divs to provide an easy user experience. This will be considered my minimum viable product.
- 
- Other potential features to implement:
-  - User management system
-  - A submission process for incorrect rules or typos
-  - Allow users to upload custom content
-
-<h2>Data Model</h2>
-Organizing and populating the database will be the lionshare of the work on this project. As it's mocked up now, I believe it wil consider of 3 main tables, realms, deployment, and battleplan, with probably a dozen tersiary and through tables. I have a rough mock up, but haven't nailed down specifics. I expect to find edge cases that may require reevaluting the model structure.
-
-<h2>Schedule</h2
-
- Precapstone weeks:
-  - Experiment with, and nail down pdf scraping method
-  - Collect high res PDF copies of books
- Week 1: 
-  - Construct basic views for testing
-  - Populate Database
- Week 2:
-  - Achieve minimum viable functionality
-  - Work on styling, logos, all around presentation
- Week 3:
-  - Work through additional wish list features
- Post Class:
-  - Finish any unfinished desired features
-  - Contact similiar webapp managers about collaborating
-  - Deploy(?)
+How do I run this code on my own web server so I can try it out?
+Honestly, at the moment you can't. I had every intention to get it deployed before I sent it you to view, but I have ran into hurdles with that. Currently it's pulling form a local Postgres server. If you'd like to see it in action, I would be happy to show you. Unfortunately this project fell by the wayside a bit, though it was a labor of love at the time I created it.
