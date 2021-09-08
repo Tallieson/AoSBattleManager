@@ -72,7 +72,7 @@ pdf2image==1.13.1
 pdfminer.six==20200517
 pickleshare==0.7.5
 pikepdf==1.15.1
-Pillow==7.1.2
+Pillow==8.3.2
 pipenv==2018.11.26
 pluggy==0.13.1
 plumber==1.6
