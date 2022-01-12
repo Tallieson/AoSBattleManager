@@ -73,7 +73,7 @@ pdfminer.six==20200517
 pickleshare==0.7.5
 pikepdf==1.15.1
 Pillow==7.1.2
-pipenv==2018.11.26
+pipenv==2022.1.8
 pluggy==0.13.1
 plumber==1.6
 prometheus-client==0.7.1
