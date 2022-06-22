@@ -61,7 +61,7 @@ nltk==3.5
 node==0.9.25
 notebook==6.0.3
 npm==0.1.1
-numpy==1.18.3
+numpy==1.22.0
 ocrmypdf==10.2.0
 odict==1.7.0
 olefile==0.46
